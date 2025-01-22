@@ -6,11 +6,13 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/21 17:22:51 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:46:53 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
+
 char    *get_next_line(int fd)
 {
-
+	
 }
