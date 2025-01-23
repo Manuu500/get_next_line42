@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:55 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/22 11:37:17 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:53:05 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,31 +64,31 @@ size_t	ft_strlen(const char *str)
 	return (cont);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	size_t	long_s;
-	char	*str;
+// char	*ft_substr(char const *s, unsigned int start, size_t len)
+// {
+// 	size_t	i;
+// 	size_t	long_s;
+// 	char	*str;
 
-	i = 0;
-	if (!s)
-		return (0);
-	long_s = ft_strlen((char *)s);
-	if (start >= long_s)
-		return (ft_strdup(""));
-	if (len > long_s - start)
-		len = long_s - start;
-	str = ft_calloc(sizeof(char), (len + 1));
-	if (!str)
-		return (0);
-	while (s[start + i] != '\0' && i < len)
-	{
-		str[i] = s[i + start];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+// 	i = 0;
+// 	if (!s)
+// 		return (0);
+// 	long_s = ft_strlen((char *)s);
+// 	if (start >= long_s)
+// 		return (ft_strdup(""));
+// 	if (len > long_s - start)
+// 		len = long_s - start;
+// 	str = malloc(sizeof(char) * (len + 1));
+// 	if (!str)
+// 		return (0);
+// 	while (s[start + i] != '\0' && i < len)
+// 	{
+// 		str[i] = s[i + start];
+// 		i++;
+// 	}
+// 	str[i] = '\0';
+// 	return (str);
+// }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
