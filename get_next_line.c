@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/23 13:57:24 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:01:48 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ char    *get_next_line(int fd)
 {
 	int	bytes;
 	static char	*buffer;
+	char	*temp;
 	
 	bytes = 0;
-	buffer = malloc(BUFFER_SIZE * (sizeof(char *)));
+	buffer = malloc(BUFFER_SIZE + 1 * (sizeof(char *)));
 	if(!buffer)
 		return (0);
 	bytes = read(fd, buffer, 3);
