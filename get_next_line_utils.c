@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:55 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/22 11:53:05 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:28:19 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,6 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-	int	cont;
-
-	cont = 0;
-	i = 0;
-	while (str[i++] != '\0')
-		cont++;
-	return (cont);
-}
-
 // char	*ft_substr(char const *s, unsigned int start, size_t len)
 // {
 // 	size_t	i;
@@ -104,4 +92,35 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (0);
 	str_cmp = (char *)build_letter(str1, s1, s2);
 	return (str_cmp);
+}
+
+void	*ft_calloc(size_t num, size_t size)
+{
+	void	*mem;
+
+	if (size == 0 || num == 0)
+	{
+		num = 1;
+		size = 1;
+	}
+	mem = malloc(num * size);
+	if (!mem)
+		return (0);
+	else
+		ft_bzero(mem, (num * size));
+	return (mem);
+}
+
+void	ft_bzero(void *s, unsigned int leng)
+{
+	unsigned int	i;
+	char			*a;
+
+	a = s;
+	i = 0;
+	while (i < leng)
+	{
+		a[i] = '\0';
+		i++;
+	}
 }

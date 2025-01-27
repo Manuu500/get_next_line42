@@ -1,7 +1,7 @@
 NAME = get_next_line.a
 
 # Archivos fuente
-SRCS = get_next_line_utils.c\
+SRCS = get_next_line_utils.c get_next_line.c\
 
 FLAGS = -Wall -Wextra -Werror
 
