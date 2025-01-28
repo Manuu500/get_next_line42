@@ -45,10 +45,23 @@ char    *get_next_line(int fd)
 {
 	static char	*buffer;
 	char	*text;
+	size_t	i;
 	
 	if (buffer == NULL)
 		buffer = calloc(1, sizeof(char *));
 	text = read_line(fd, buffer);
+	while (text[i])
+	{
+		buffer[i] = text[i];
+		i++;
+	}
+	free (text);
+	while (buffer[i])
+	{
+		write(1, &buffer[i], 1);
+		i++;
+	}
+	
 }
 
 // int main() {
