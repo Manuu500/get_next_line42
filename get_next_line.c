@@ -6,11 +6,12 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/27 14:23:59 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:48:17 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_utils.c"
+
 
 size_t	ft_strlen(const char *str)
 {
@@ -27,17 +28,29 @@ size_t	ft_strlen(const char *str)
 char	*read_line(int	fd, char	*buffer)
 {
 	int	bytes;
-	char	*temp;
+	char	temp[BUFFER_SIZE + 1];
+	char	*buffer_temp;
+	size_t	i;
 	
 	bytes = 1;
-	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char *));
-	while (bytes != 0 && !ft_strchr(buffer, "\n"))
+	while (bytes > 0 && !ft_strchr(buffer, '\n'))
 	{
 		bytes = read(fd, temp, BUFFER_SIZE);
+		if (bytes < 0)
+			return (NULL);
 		temp[bytes] = '\0';
-		buffer = ft_strjoin(buffer, temp);
+		//contenido de buffer igualar a buffer_size
+		buffer_temp = ft_calloc(ft_strlen(buffer) + 1, sizeof(char));
+		if(!buffer_temp)
+			return (NULL);
+		i = -1;
+		while(buffer[++i])
+			buffer_temp[i] = buffer[i];
+		buffer = ft_strjoin(buffer_temp, temp);
+		if(!buffer)
+			break;
+		free(buffer_temp);
 	}
-	free(temp);
 	return (buffer);
 }
 
@@ -48,7 +61,7 @@ char    *get_next_line(int fd)
 	size_t	i;
 	
 	if (buffer == NULL)
-		buffer = calloc(1, sizeof(char *));
+		buffer = ft_calloc(1, sizeof(char));
 	text = read_line(fd, buffer);
 	while (text[i])
 	{
@@ -56,70 +69,37 @@ char    *get_next_line(int fd)
 		i++;
 	}
 	free (text);
-	while (buffer[i])
-	{
-		write(1, &buffer[i], 1);
-		i++;
-	}
+	return (buffer);
 	
 }
 
-// int main() {
-//     int fd = open("test.txt", O_RDONLY);  // Abre el archivo test.txt en modo solo lectura
-//     if (fd == -1) {
-//         perror("Error al abrir el archivo");void	ft_bzero(void *s, unsigned int leng)
-// {
-// 	unsigned int	i;
-// 	char			*a;
 
-// 	a = s;
-// 	i = 0;
-// 	while (i < leng)
-// 	{
-// 		a[i] = '\0';
-// 		i++;
-// 	}
-// }
-//         return 1;
-//     }
+int main(void)
+{
+    int fd;
+    char buffer[1024];
+    char *line;
 
-//     char *line;
-//     while ((line = get_next_line(fd)) != NULL) {
-//         printf("Línea leída: %s\n", line);  // Imprimir la línea leída
-//         free(line);  // Liberar el buffer después de usarlo
-//     }
+    // Abre el archivo en modo lectura
+    fd = open("test.txt", O_RDONLY);
+    if (fd == -1)
+    {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
 
-//     close(fd);  // Cerrar el archivo
-//     return 0;
-// }
+    // Llama a la función read_line
+    line = read_line(fd, buffer);
+    if (line)
+    {
+        printf("Linea leida: %s\n", line);
+    }
+    else
+    {
+        printf("No se pudo leer la linea\n");
+    }
 
-
-// buffer = malloc(BUFFER_SIZE + 1 * (sizeof(char)));
-	// if(!buffer)
-	// 	return (0);
-	// bytes = read(fd, buffer, BUFFER_SIZE);
-	// temp = ft_strjoin(buffer, temp);
-	// if (bytes == 0)void	ft_bzero(void *s, unsigned int leng)
-// {
-// 	unsigned int	i;
-// 	char			*a;
-
-// 	a = s;
-// 	i = 0;
-// 	while (i < leng)
-// 	{
-// 		a[i] = '\0';
-// 		i++;
-// 	}
-// }
-	// {
-	// 	if (ft_strchr(buffer, "\n"))
-	// 		get_next_line(fd);
-	// 	return (buffer);
-	// }
-	// else
-	// 	return (NULL);
-	// buffer[bytes] = '\0';
-	// free(buffer);
-	// // printf("Llamada número: %d\n", count);  // Imprimir el contador	
-	// return (buffer);
+    // Cierra el archivo
+    close(fd);
+    return 0;
+}

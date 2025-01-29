@@ -6,11 +6,26 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:55 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/27 12:28:19 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:30:58 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+
+void	ft_bzero(void *s, unsigned int leng)
+{
+	unsigned int	i;
+	char			*a;
+
+	a = s;
+	i = 0;
+	while (i < leng)
+	{
+		a[i] = '\0';
+		i++;
+	}
+}
 
 static char	*build_letter(char *str, char const *s1, char const *s2)
 {
@@ -109,18 +124,4 @@ void	*ft_calloc(size_t num, size_t size)
 	else
 		ft_bzero(mem, (num * size));
 	return (mem);
-}
-
-void	ft_bzero(void *s, unsigned int leng)
-{
-	unsigned int	i;
-	char			*a;
-
-	a = s;
-	i = 0;
-	while (i < leng)
-	{
-		a[i] = '\0';
-		i++;
-	}
 }

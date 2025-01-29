@@ -6,14 +6,14 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:23:21 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/27 12:20:31 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:38:09 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1024
 # endif
 # include <stddef.h>
 # include <stdio.h>
@@ -27,5 +27,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+void	*ft_calloc(size_t num, size_t size);
+void	ft_bzero(void *s, unsigned int leng);
 
 #endif
