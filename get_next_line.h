@@ -6,14 +6,14 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:23:21 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/29 14:38:09 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:36:47 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 300000
 # endif
 # include <stddef.h>
 # include <stdio.h>

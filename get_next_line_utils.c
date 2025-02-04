@@ -6,12 +6,11 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:55 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/01/29 14:30:58 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:32:41 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 void	ft_bzero(void *s, unsigned int leng)
 {
@@ -25,6 +24,23 @@ void	ft_bzero(void *s, unsigned int leng)
 		a[i] = '\0';
 		i++;
 	}
+}
+
+void	*ft_calloc(size_t num, size_t size)
+{
+	void	*mem;
+
+	if (size == 0 || num == 0)
+	{
+		num = 1;
+		size = 1;
+	}
+	mem = malloc(num * size);
+	if (!mem)
+		return (0);
+	else
+		ft_bzero(mem, (num * size));
+	return (mem);
 }
 
 static char	*build_letter(char *str, char const *s1, char const *s2)
@@ -67,32 +83,6 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-// char	*ft_substr(char const *s, unsigned int start, size_t len)
-// {
-// 	size_t	i;
-// 	size_t	long_s;
-// 	char	*str;
-
-// 	i = 0;
-// 	if (!s)
-// 		return (0);
-// 	long_s = ft_strlen((char *)s);
-// 	if (start >= long_s)
-// 		return (ft_strdup(""));
-// 	if (len > long_s - start)
-// 		len = long_s - start;
-// 	str = malloc(sizeof(char) * (len + 1));
-// 	if (!str)
-// 		return (0);
-// 	while (s[start + i] != '\0' && i < len)
-// 	{
-// 		str[i] = s[i + start];
-// 		i++;
-// 	}
-// 	str[i] = '\0';
-// 	return (str);
-// }
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	str1_long;
@@ -109,19 +99,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str_cmp);
 }
 
-void	*ft_calloc(size_t num, size_t size)
-{
-	void	*mem;
-
-	if (size == 0 || num == 0)
-	{
-		num = 1;
-		size = 1;
-	}
-	mem = malloc(num * size);
-	if (!mem)
-		return (0);
-	else
-		ft_bzero(mem, (num * size));
-	return (mem);
-}
