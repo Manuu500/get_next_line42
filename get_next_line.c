@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/04 13:42:03 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:38:53 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*read_line(int	fd, char	*buffer)
 	bytes = 1;
 	if (buffer == NULL)
 		buffer = ft_calloc(1, sizeof(char));
-	while (bytes > 0 && !ft_strchr(buffer, '\n'))
+	while (bytes >= 0 && !ft_strchr(buffer, '\n'))
 	{
 		bytes = read(fd, temp, BUFFER_SIZE);
 		if (bytes < 0)
@@ -42,17 +42,13 @@ char	*read_line(int	fd, char	*buffer)
 			return (NULL);
 		}
 		temp[bytes] = '\0';
-		buffer_temp = malloc(ft_strlen(buffer) + bytes + 1);
+		buffer_temp = malloc(ft_strlen(buffer));
 		if(!buffer_temp)
 			return (NULL);
 		if (buffer)
 		{
 			buffer_temp = ft_strjoin(buffer, temp);
 			free(buffer);
-		}
-		else
-		{
-			buffer_temp = ft_strdup(temp);
 		}
 		buffer = buffer_temp;
 	}
@@ -70,21 +66,22 @@ char    *get_next_line(int fd)
 	if (!text)
 		return (NULL);
 	
-	// i = 0;
-	// while (text[i])
-	// {
-	// 	buffer[i] = text[i];
-	// 	i++;
-	// }
-	// free (text);
 	return (text);
 	
 }
 
 // char *get_next_line(int fd);
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+char *get_next_line(int fd);
+
 int main(void)
 {
+	int index = 0;
     int fd = open("test.txt", O_RDONLY);
     if (fd < 0)
     {
@@ -95,7 +92,8 @@ int main(void)
     char *line;
     while ((line = get_next_line(fd)) != NULL)
     {
-        printf("%s\n", line);
+		index++;
+        printf("%i: %s\n", index, line);
         free(line);
     }
 
