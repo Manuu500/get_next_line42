@@ -29,5 +29,7 @@ size_t	ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_calloc(size_t num, size_t size);
 void	ft_bzero(void *s, unsigned int leng);
+void	*ft_memcpy(void *dest, const void *src, unsigned int n);
+char	*ft_strdup(const char *s);
 
 #endif

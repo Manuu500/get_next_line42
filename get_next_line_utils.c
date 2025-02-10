@@ -12,35 +12,25 @@
 
 #include "get_next_line.h"
 
-void	ft_bzero(void *s, unsigned int leng)
+void	*ft_memcpy(void *dest, const void *src, unsigned int n)
 {
-	unsigned int	i;
-	char			*a;
+	size_t			i;
+	unsigned char	*a;
+	unsigned char	*b;
 
-	a = s;
+	b = (unsigned char *)dest;
+	a = (unsigned char *)src;
 	i = 0;
-	while (i < leng)
+	if (n == 0)
+		return (dest);
+	if (!dest && !src && n > 0)
+		return (0);
+	while (i < n)
 	{
-		a[i] = '\0';
+		b[i] = a[i];
 		i++;
 	}
-}
-
-void	*ft_calloc(size_t num, size_t size)
-{
-	void	*mem;
-
-	if (size == 0 || num == 0)
-	{
-		num = 1;
-		size = 1;
-	}
-	mem = malloc(num * size);
-	if (!mem)
-		return (0);
-	else
-		ft_bzero(mem, (num * size));
-	return (mem);
+	return (dest);
 }
 
 static char	*build_letter(char *str, char const *s1, char const *s2)
