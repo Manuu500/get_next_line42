@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/04 13:42:03 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:15:38 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 char	*read_line(int fd, char *buffer)
 {
-    size_t	bytes;
+    int     bytes;
     char	temp[BUFFER_SIZE + 1];
     char	*buffer_temp;
     
@@ -69,10 +69,10 @@ char	*read_line(int fd, char *buffer)
     {
         buffer = malloc(1);
         if (!buffer)
-            return NULL;
+            return (NULL);
         buffer[0] = '\0';
     }
-    while (!ft_strchr(buffer, '\n') || bytes < 0)
+    while (!ft_strchr(buffer, '\n'))
     {
         bytes = read(fd, temp, BUFFER_SIZE);
         if (bytes <= 0)
@@ -82,6 +82,7 @@ char	*read_line(int fd, char *buffer)
         if (!buffer_temp)
         {
             free(buffer);
+            free(buffer_temp);
             return (NULL);
         }
         free(buffer);
@@ -100,16 +101,15 @@ char	*get_next_line(int fd)
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
     buffer = read_line(fd, buffer);
-    if (!buffer || *buffer == '\0')
-        return (NULL);
-    line = ft_substr(buffer, 0, ft_strchr(buffer, '\n') - buffer + 1);
-    if (!line)
+    if (!buffer)
     {
-        free(buffer);
-        buffer = NULL;
+        free (buffer);
         return (NULL);
     }
-	//Actualiza en temp, un duplicado de la línea buffer despues del salto de línea
+    if (*buffer == '\0')
+    {
+        return (NULL);
+    }
 	new_line = ft_strchr(buffer, '\n');
 	if (new_line)
 	{
@@ -131,24 +131,24 @@ char	*get_next_line(int fd)
 #include <fcntl.h>
 #include <unistd.h>
 
-int main(void)
-{
-    int index = 0;
-    int fd = open("test.txt", O_RDONLY);
-    if (fd < 0)
-    {
-        perror("Error opening file");
-        return 1;
-    }
+// int main(void)
+// {
+//     int index = 0;
+//     int fd = open("test.txt", O_RDONLY);
+//     if (fd < 0)
+//     {
+//         perror("Error opening file");
+//         return 1;
+//     }
 
-    char *line;
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        index++;
-        printf("%i: %s", index, line);
-        free(line);
-    }
+//     char *line;
+//     while ((line = get_next_line(6)) != NULL)
+//     {
+//         index++;
+//         printf("%i: %s", index, line);
+//         free(line);
+//     }
 
-    close(fd);
-    return 0;
-}
+//     close(fd);
+//     return 0;
+// }

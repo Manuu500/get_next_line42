@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:55 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/06 11:11:39 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:13:47 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,15 @@ static char	*build_letter(char *str, char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
-	while (s2[j] != '\0' || s1[i] != '\0')
+	while (s1[i] != '\0')
 	{
-		if (s1[i] != '\0')
-		{
-			str[i] = s1[i];
-			i++;
-		}
-		else
-		{
-			str[i + j] = s2[j];
-			j++;
-		}
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
 	}
 	str[i + j] = '\0';
 	return ((char *)str);
