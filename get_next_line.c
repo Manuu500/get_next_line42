@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/18 14:15:38 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:05:56 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ char	*read_line(int fd, char *buffer)
     {
         buffer = malloc(1);
         if (!buffer)
+        {
+            free (buffer);
             return (NULL);
+        }
         buffer[0] = '\0';
     }
     while (!ft_strchr(buffer, '\n'))
@@ -100,7 +103,8 @@ char	*get_next_line(int fd)
     
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-    buffer = read_line(fd, buffer);
+    if ((buffer && !ft_strchr(buffer, '\n')) || !buffer)
+        buffer = read_line(fd, buffer);
     if (!buffer)
     {
         free (buffer);
@@ -126,29 +130,26 @@ char	*get_next_line(int fd)
     return (line);
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-
-// int main(void)
-// {
-//     int index = 0;
-//     int fd = open("test.txt", O_RDONLY);
-//     if (fd < 0)
-//     {
-//         perror("Error opening file");
-//         return 1;
-//     }
-
-//     char *line;
-//     while ((line = get_next_line(6)) != NULL)
-//     {
-//         index++;
-//         printf("%i: %s", index, line);
-//         free(line);
-//     }
-
-//     close(fd);
-//     return 0;
-// }
+//  #include <stdio.h>
+//  #include <stdlib.h>
+//  #include <fcntl.h>
+//  #include <unistd.h>
+//  int main(void)
+//  {
+//      int index = 0;
+//      int fd = open("test.txt", O_RDONLY);
+//      if (fd < 0)
+//      {
+//          perror("Error opening file");
+//          return 1;
+//      }
+//      char *line;
+//      while ((line = get_next_line(fd)) != NULL)
+//      {
+//          index++;
+//          printf("%i: %s", index, line);
+//          free(line);
+//      }
+//      close(fd);
+//      return 0;
+//  }
