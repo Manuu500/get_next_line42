@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/19 15:27:01 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:31:52 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,13 @@ char	*read_line(int fd, char *buffer)
     while (!ft_strchr(buffer, '\n'))
     {
         bytes = read(fd, temp, BUFFER_SIZE);
-        if (bytes <= 0)
-            break;
+        if (bytes < 0)
+		{
+			free(buffer);
+			return(NULL);
+		}
+		if (bytes == 0)
+			break;
         temp[bytes] = '\0';
         buffer_temp = ft_strjoin(buffer, temp);
         if (!buffer_temp)
@@ -111,21 +116,21 @@ char	*get_next_line(int fd)
     return (line);
 }
 
- #include <stdio.h>
- #include <stdlib.h>
- #include <fcntl.h>
- #include <unistd.h>
- int main(void)
- {
-     int index = 0;
-     int fd = open("test.txt", O_RDONLY);
-     char *line;
-     while ((line = get_next_line(fd)) != NULL)
-     {
-         index++;
-         printf("%i: %s", index, line);
-         free(line);
-     }
-     close(fd);
-     return 0;
- }
+//  #include <stdio.h>
+//  #include <stdlib.h>
+//  #include <fcntl.h>
+//  #include <unistd.h>
+//  int main(void)
+//  {
+//      int index = 0;
+//      int fd = open("test.txt", O_RDONLY);
+//      char *line;
+//      while ((line = get_next_line(fd)) != NULL)
+//      {
+//          index++;
+//          printf("%i: %s", index, line);
+//          free(line);
+//      }
+//      close(fd);
+//      return 0;
+//  }
