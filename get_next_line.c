@@ -6,17 +6,24 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/19 15:31:52 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:32:30 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*free_buffer(char **buffer)
+{
+	free(*buffer);
+	*buffer = NULL;
+	return (NULL);
+}
+
 char	*ft_strdup(const char *s)
 {
 	char	*str;
 
-	str = ft_calloc( ft_strlen(s) + 1, sizeof(char));
+	str = ft_calloc(ft_strlen(s) + 1, sizeof(char));
 	if (!str)
 		return (0);
 	ft_memcpy(str, s, ft_strlen(s) + 1);
@@ -51,69 +58,59 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 char	*read_line(int fd, char *buffer)
 {
-    int     bytes;
-    char	temp[BUFFER_SIZE + 1];
-    char	*buffer_temp;
-    
-    if (!buffer)
-    {
-        buffer = ft_calloc(1, sizeof(char));
-        if (!buffer)
-            return (NULL);
-    }
-    while (!ft_strchr(buffer, '\n'))
-    {
-        bytes = read(fd, temp, BUFFER_SIZE);
-        if (bytes < 0)
-		{
-			free(buffer);
-			return(NULL);
-		}
+	char	temp[BUFFER_SIZE + 1];
+	char	*buffer_temp;
+	int		bytes;
+
+	if (!buffer)
+	{
+		buffer = ft_calloc(1, sizeof(char));
+		if (!buffer)
+			return (NULL);
+	}
+	while (!ft_strchr(buffer, '\n'))
+	{
+		bytes = read(fd, temp, BUFFER_SIZE);
+		if (bytes < 0)
+			return (free_buffer(&buffer));
 		if (bytes == 0)
-			break;
-        temp[bytes] = '\0';
-        buffer_temp = ft_strjoin(buffer, temp);
-        if (!buffer_temp)
-        {
-            free(buffer);
-            return (NULL);
-        }
-        free(buffer);
-        buffer = buffer_temp;
-    }
-    return (buffer);
+			break ;
+		temp[bytes] = '\0';
+		buffer_temp = ft_strjoin(buffer, temp);
+		if (!buffer_temp)
+			return (free_buffer(&buffer));
+		free(buffer);
+		buffer = buffer_temp;
+	}
+	return (buffer);
 }
 
 char	*get_next_line(int fd)
 {
-    static char	*buffer;
-    char		*line;
-    char		*temp;
-    char        *new_line;
-    
-    if (fd < 0 || BUFFER_SIZE <= 0)
-        return (NULL);
-    buffer = read_line(fd, buffer);
-    if (!buffer || *buffer == '\0')
-    {
-        free (buffer);
-		buffer = NULL;
-        return (NULL);
-    }
+	static char		*buffer;
+	char			*line;
+	char			*temp;
+	char			*new_line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buffer = read_line(fd, buffer);
+	if (!buffer || *buffer == '\0')
+		return (free_buffer(&buffer));
 	new_line = ft_strchr(buffer, '\n');
 	if (new_line)
 	{
-        line = ft_substr(buffer, 0, new_line - buffer + 1);
-	    temp = ft_strdup(new_line + 1);
+		line = ft_substr(buffer, 0, new_line - buffer + 1);
+		temp = ft_strdup(new_line + 1);
 	}
 	else
 	{
-	    line = ft_strdup(buffer);
-	    temp = NULL;
+		line = ft_strdup(buffer);
+		temp = NULL;
 	}
-    free(buffer);
-    buffer = temp;
-    return (line);
+	free(buffer);
+	buffer = temp;
+	return (line);
 }
 
 //  #include <stdio.h>

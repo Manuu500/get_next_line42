@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:23:21 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/19 15:17:10 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:21:23 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
-
-char    *get_next_line(int fd);
+/* @brief Essta función coge un int que es un fichero para extraer su contenido
+	@param int Fichero a leer
+	@return Devuelve una cadena leida hasta 
+	el final de fichero o hasta salto de línea */
+char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *str);

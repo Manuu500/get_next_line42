@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:55 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/19 15:19:07 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:24:03 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 size_t	ft_strlen(const char *str)
 {
-    size_t	cont;
+	size_t	cont;
 
-    cont = 0;
-    while (str[cont] != '\0')
-        cont++;
-    return (cont);
+	cont = 0;
+	while (str[cont] != '\0')
+		cont++;
+	return (cont);
 }
 
 void	*ft_memcpy(void *dest, const void *src, unsigned int n)
@@ -42,17 +42,6 @@ void	*ft_memcpy(void *dest, const void *src, unsigned int n)
 	}
 	return (dest);
 }
-
-// static char	*build_letter(char *str, char *s1, char *s2)
-// {
-// 	size_t	i;
-// 	size_t	j;
-
-// 	i = 0;
-// 	j = 0;
-	
-// 	return ((char *)str);
-// }
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -91,8 +80,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		str1[i + j] = s2[j];
 		j++;
 	}
-		str1[i + j] = '\0';
-	// str_cmp = build_letter(str1, s1, s2);
+	str1[i + j] = '\0';
 	return (str1);
 }
 
@@ -118,9 +106,7 @@ void	*ft_calloc(size_t num, size_t size)
 		{
 			a[i] = '\0';
 			i++;
-		}	
+		}
 	}
-		// ft_bzero(mem, (num * size));
 	return (a);
 }
-
