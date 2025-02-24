@@ -72,6 +72,7 @@ char	*read_line(int fd, char *buffer)
 	{
 		bytes = read(fd, temp, BUFFER_SIZE);
 		if (bytes < 0)
+		//Con esto le pasas la dirección de buffer a la función
 			return (free_buffer(&buffer));
 		if (bytes == 0)
 			break ;
