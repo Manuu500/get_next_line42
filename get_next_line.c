@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:22:51 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/19 16:32:30 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:04:42 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*read_line(int fd, char *buffer)
 	{
 		bytes = read(fd, temp, BUFFER_SIZE);
 		if (bytes < 0)
-		//Con esto le pasas la dirección de buffer a la función
 			return (free_buffer(&buffer));
 		if (bytes == 0)
 			break ;

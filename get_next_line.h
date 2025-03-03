@@ -6,7 +6,7 @@
 /*   By: mruiz-ur <mruiz-ur@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:23:21 by mruiz-ur          #+#    #+#             */
-/*   Updated: 2025/02/19 16:21:23 by mruiz-ur         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:11:55 by mruiz-ur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 	@return Devuelve una cadena leida hasta 
 	el final de fichero o hasta salto de línea */
 char	*get_next_line(int fd);
-/* @brief Esta función encuentra la primera ocurrencia del carácter que se le pase
+/* @brief Esta función encuentra la primera ocurrencia
+	del carácter que se le pase
 	@param char* Texto a leer
 	@param char	 Caracter a encontrar en el texto
 	@return Devuelve un puntero a la primera ocurrencia
@@ -60,8 +61,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 	@return Devuelve un puntero hacia la memoria creada */
 void	*ft_calloc(size_t num, size_t size);
 void	ft_bzero(void *s, unsigned int leng);
-/* @brief Esta función copia un bloque de memoria de una ubicación a otra
-	@param dest Puntero a bloque de memoria donde se pegará el bloque de memoria copiado
+/* @brief Esta función copia un bloque de memoria
+	de una ubicación a otra
+	@param dest Puntero a bloque de memoria donde se pegará
+	el bloque de memoria copiado
 	@param src Puntero a bloque de memoria donde se copiarán los datos
 	@param n Número de bytes que se copiarán */
 void	*ft_memcpy(void *dest, const void *src, unsigned int n);
